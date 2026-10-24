@@ -878,6 +878,8 @@
   }
 
   async function detectLive() {
+    // Static hosting has no API behind it: skip the probe rather than log a 404 for every visitor.
+    if (location.protocol === 'file:' || location.hostname.endsWith('.github.io')) return;
     try {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 2500);
