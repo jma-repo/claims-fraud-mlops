@@ -1,0 +1,29 @@
+# Pipeline settings. Every number here is synthetic-data scaffolding, not a claim about a real book.
+seed: 42
+
+data:
+  first_month: "2024-09"   # 24 months of history: 2024-09 .. 2026-08
+  history_months: 24
+  new_month: "2026-09"     # the month being triaged "today"; its labels are hidden from the model
+  claims_per_month: 650
+
+split:                     # time-based, never random: the model must predict the future
+  train_until: "2026-02"   # 18 months
+  valid_until: "2026-05"   # 3 months, used for early stopping and calibration
+  # test = 2026-06 .. 2026-08 (3 months), reported once
+
+model:
+  name: claims-fraud-triage   # MLflow registered model name
+  promotion_metric: net_savings_per_month
+  min_improvement: 0.0         # challenger must beat the champion by this much (CAD/month)
+
+segments:
+  k: 8                         # claim segments shown on the pattern map
+  novelty_ratio: 4.0           # a kind of claim 4x more common than last year = worth a look
+  group_distance: 8.0          # average-linkage cut for grouping flagged claims into patterns
+  map_sample: 3500             # points drawn on the pattern map
+
+drift:
+  bins: 10
+  warn: 0.10
+  alert: 0.25

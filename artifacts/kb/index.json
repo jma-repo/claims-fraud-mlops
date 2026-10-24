@@ -1,0 +1,7 @@
+{
+  "built_at": "2026-10-24T02:05:08+00:00",
+  "documents": 6,
+  "chunks": 51,
+  "embed_model": "text-embedding-nomic-embed-text-v1.5",
+  "dimensions": 768
+}

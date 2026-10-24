@@ -1,0 +1,234 @@
+[
+  {
+    "question": "Why is this claim flagged, and what should the investigator check first?",
+    "claim_id": "C-116714",
+    "answer": "Why it is in the queue [C]:\n- Adjuster notes read like confirmed fraud files: 'occupants reported', 'pain', 'neck'\n- 5 of 5 occupants claim injury\n- Same representative and clinic paired on 39 prior claims\n- Total claimed $103,579\n- Triage model: fraud probability 93%, expected net saving of investigating $66,520, band Investigate, queue rank 1\n- Links: part of ring R1 (Toronto multi-injury claims around CLINIC-02 and REP-03): 45 claims linked through 9 shared phone numbers and 9 shared addresses\n\nWhat to check first:\n- Check if there are any shared phone numbers or addresses between other recent claims.\n- Review the body shop's average repair-to-value ratio and compare it to industry standards.\n[SIU Referral Guidelines]\n- Refer this claim to the SIU as per the guidelines, given the red-flag indicators present in the adjuster notes.\n- Investigate if the same representative and clinic are involved in other recent claims linked through shared phone numbers or addresses.",
+    "mode": "generated",
+    "retrieval": "hybrid",
+    "sources": [
+      {
+        "label": "C",
+        "source": "claim file C-116714",
+        "title": "Claim file",
+        "heading": "C-116714",
+        "score": null,
+        "semantic": null,
+        "lexical": null,
+        "snippet": "Claim file C-116714 (synthetic data)\nLoss: rear end in Toronto (ON) at 18:00, reported 2026-09-26, 0 days after the loss.\nAmounts: total claimed $103,579 (injury reserve $98,729, repair estimate $3,761, towing and storage $1,090, 11 storage days, towed 18 km).\nPeople: 5 occupants"
+      },
+      {
+        "label": "1",
+        "source": "red-flag-indicators.md",
+        "title": "Red-Flag Indicator Guide",
+        "heading": "Staged collisions",
+        "score": 0.93,
+        "semantic": 0.872,
+        "lexical": 1.0,
+        "snippet": "Staged collisions are usually organised by a ring that reuses people, phones and providers. Indicators:\n\n- The insured says the vehicle ahead stopped suddenly for no reason, often at night.\n- Three or more occupants, all reporting soft-tissue injuries (neck and back pain) with li"
+      },
+      {
+        "label": "2",
+        "source": "model-card.md",
+        "title": "Model Card: claims-fraud-triage version 1",
+        "heading": "Features the model uses",
+        "score": 0.767,
+        "semantic": 0.76,
+        "lexical": 0.775,
+        "snippet": "- What happened: loss type, province, amounts (total, injury reserve, repair), repair-to-value ratio, total loss, hour of loss, occupants and injured, soft-tissue only, police report, witnesses, towing distance, storage days and fees.\n- Who is claiming: policy age at the time of "
+      },
+      {
+        "label": "3",
+        "source": "siu-referral-guidelines.md",
+        "title": "SIU Referral Guidelines",
+        "heading": "When to refer a claim",
+        "score": 0.737,
+        "semantic": 0.803,
+        "lexical": 0.657,
+        "snippet": "Refer a claim to the SIU when any of these is true:\n\n- The claim is in the monthly SIU queue produced by the triage model.\n- The adjuster's red-flag checklist scores 3 or more indicators from the red-flag indicator guide.\n- The adjuster has a specific, documented concern, for exa"
+      },
+      {
+        "label": "4",
+        "source": "investigation-playbook.md",
+        "title": "SIU Investigation Playbook",
+        "heading": "Provider and network review",
+        "score": 0.728,
+        "semantic": 0.76,
+        "lexical": 0.69,
+        "snippet": "When several claims share people, phones, addresses or providers, map the links before contacting anyone. A ring investigation is coordinated by the SIU lead so that statements and inspections happen in a planned order. Never contact a provider about another claimant's file."
+      }
+    ],
+    "model": "qwen2.5-3b-instruct",
+    "local_only": true,
+    "elapsed_ms": 1062,
+    "recorded": true
+  },
+  {
+    "question": "Why is this claim flagged, and what should the investigator check first?",
+    "claim_id": "C-116595",
+    "answer": "Why it is in the queue [C]:\n- Adjuster notes read like confirmed fraud files: 'paramedics', 'passenger', 'assessed'\n- 3 of 3 occupants claim injury\n- Total claimed $90,736\n- Vehicle value $73,163\n- Triage model: fraud probability 19%, expected net saving of investigating $11,131, band Standard, queue rank 24\n- Links: member of emerging pattern E1 (High tow distances and storage): 31 similar claims this month, a kind of claim the model has not been trained on\n\nWhat to check first:\n- Check if there are any repeated pairings of the same representative and clinic across unrelated losses. [1]\n- Verify if the tow operator arrived before police or anyone called for a tow, and if the vehicle was towed tens of kilometres past repair shops to a storage yard in another city. [2]\n- Investigate whether additional passengers came forward after the initial report, and if injuries were first reported weeks after the loss. [4]",
+    "mode": "generated",
+    "retrieval": "hybrid",
+    "sources": [
+      {
+        "label": "C",
+        "source": "claim file C-116595",
+        "title": "Claim file",
+        "heading": "C-116595",
+        "score": null,
+        "semantic": null,
+        "lexical": null,
+        "snippet": "Claim file C-116595 (synthetic data)\nLoss: intersection in Toronto (ON) at 19:00, reported 2026-09-21, 0 days after the loss.\nAmounts: total claimed $90,736 (injury reserve $79,998, repair estimate $4,444, towing and storage $6,294, 33 storage days, towed 68 km).\nPeople: 3 occupa"
+      },
+      {
+        "label": "1",
+        "source": "red-flag-indicators.md",
+        "title": "Red-Flag Indicator Guide",
+        "heading": "Staged collisions",
+        "score": 0.892,
+        "semantic": 0.846,
+        "lexical": 0.949,
+        "snippet": "Staged collisions are usually organised by a ring that reuses people, phones and providers. Indicators:\n\n- The insured says the vehicle ahead stopped suddenly for no reason, often at night.\n- Three or more occupants, all reporting soft-tissue injuries (neck and back pain) with li"
+      },
+      {
+        "label": "2",
+        "source": "red-flag-indicators.md",
+        "title": "Red-Flag Indicator Guide",
+        "heading": "Towing and storage schemes",
+        "score": 0.888,
+        "semantic": 0.819,
+        "lexical": 0.973,
+        "snippet": "A tow operator arrives at the scene without being called, tows the vehicle to a distant storage yard, and lets storage charges accumulate before demanding a release fee. Indicators:\n\n- The tow truck arrived before police or before anyone called for a tow.\n- The vehicle was towed "
+      },
+      {
+        "label": "3",
+        "source": "model-card.md",
+        "title": "Model Card: claims-fraud-triage version 1",
+        "heading": "Features the model uses",
+        "score": 0.879,
+        "semantic": 0.779,
+        "lexical": 1.0,
+        "snippet": "- What happened: loss type, province, amounts (total, injury reserve, repair), repair-to-value ratio, total loss, hour of loss, occupants and injured, soft-tissue only, police report, witnesses, towing distance, storage days and fees.\n- Who is claiming: policy age at the time of "
+      },
+      {
+        "label": "4",
+        "source": "red-flag-indicators.md",
+        "title": "Red-Flag Indicator Guide",
+        "heading": "Injury build-up and phantom passengers",
+        "score": 0.826,
+        "semantic": 0.836,
+        "lexical": 0.813,
+        "snippet": "A real collision is inflated by adding injured people or treatment that did not happen. Indicators: additional passengers come forward after the first report, injuries are first reported weeks after the loss, every occupant claims injury, and treatment plans are submitted before "
+      }
+    ],
+    "model": "qwen2.5-3b-instruct",
+    "local_only": true,
+    "elapsed_ms": 1307,
+    "recorded": true
+  },
+  {
+    "question": "A storage yard is holding the vehicle and demanding a release fee. What should the adjuster do?",
+    "claim_id": null,
+    "answer": "The adjuster should move the vehicle to a repair facility of the insured's choice as soon as possible to stop the daily charges (2). They should ask the operator for an itemised invoice, the tow authorisation signed at the scene, and the operator's licence or registration where required by province (3). The adjuster should compare the invoice with provincial towing and storage rules and normal market rates in the area; they should not pay a release fee that has no basis in the invoice (4). If the same operator appears on several claims, the adjuster should refer the pattern to the SIU lead as one group, not claim by claim (5).",
+    "mode": "generated",
+    "retrieval": "hybrid",
+    "sources": [
+      {
+        "label": "1",
+        "source": "red-flag-indicators.md",
+        "title": "Red-Flag Indicator Guide",
+        "heading": "Towing and storage schemes",
+        "score": 0.853,
+        "semantic": 0.732,
+        "lexical": 1.0,
+        "snippet": "A tow operator arrives at the scene without being called, tows the vehicle to a distant storage yard, and lets storage charges accumulate before demanding a release fee. Indicators:\n\n- The tow truck arrived before police or before anyone called for a tow.\n- The vehicle was towed "
+      },
+      {
+        "label": "2",
+        "source": "investigation-playbook.md",
+        "title": "SIU Investigation Playbook",
+        "heading": "Towing and storage disputes",
+        "score": 0.765,
+        "semantic": 0.744,
+        "lexical": 0.791,
+        "snippet": "When a storage yard is holding a vehicle and charges are accruing:\n\n1. Move the vehicle to a repair facility of the insured's choice as soon as possible to stop the daily charges.\n2. Ask the operator for an itemised invoice, the tow authorisation signed at the scene, and the oper"
+      },
+      {
+        "label": "3",
+        "source": "pattern-briefs.md",
+        "title": "Pattern Briefs for 2026-09",
+        "heading": "Emerging pattern E1: High tow distances and storage",
+        "score": 0.637,
+        "semantic": 0.675,
+        "lexical": 0.591,
+        "snippet": "31 claims this month, $625,171 claimed, belong to a kind of claim that is far more common than in the previous 12 months. Shared providers: tow company TOW-25 on 100% of them. What sets them apart: towing and storage fees average $5,549 against $141 last year; storage days averag"
+      },
+      {
+        "label": "4",
+        "source": "investigation-playbook.md",
+        "title": "SIU Investigation Playbook",
+        "heading": "First 48 hours",
+        "score": 0.626,
+        "semantic": 0.646,
+        "lexical": 0.603,
+        "snippet": "1. Read the whole file, not only the model's reason codes: notes, photos, estimates and treatment plans.\n2. Confirm coverage facts: policy start date, vehicle on the policy, listed drivers.\n3. Check the identifiers: do the phone number, address, vehicle or providers appear on oth"
+      }
+    ],
+    "model": "qwen2.5-3b-instruct",
+    "local_only": true,
+    "elapsed_ms": 1418,
+    "recorded": true
+  },
+  {
+    "question": "What is the deductible on a comprehensive policy in Quebec?",
+    "claim_id": null,
+    "answer": "The material does not cover this.",
+    "mode": "generated",
+    "retrieval": "hybrid",
+    "sources": [
+      {
+        "label": "1",
+        "source": "siu-referral-guidelines.md",
+        "title": "SIU Referral Guidelines",
+        "heading": "Purpose and scope",
+        "score": 0.784,
+        "semantic": 0.607,
+        "lexical": 1.0,
+        "snippet": "These guidelines decide which auto claims go to the Special Investigations Unit (SIU), in what order, and what has to be in the file when they do. They apply to collision, comprehensive, accident benefits and third-party liability claims in Ontario, Alberta, Nova Scotia and New B"
+      },
+      {
+        "label": "2",
+        "source": "red-flag-indicators.md",
+        "title": "Red-Flag Indicator Guide",
+        "heading": "Post-loss policy inception",
+        "score": 0.645,
+        "semantic": 0.621,
+        "lexical": 0.675,
+        "snippet": "Coverage is bought after the damage happened, then the damage is reported as new. In Alberta this is most common after hailstorms. Indicators: a policy that started days before the reported loss, a long delay between the storm and the report, and an appraiser's note that the dent"
+      },
+      {
+        "label": "3",
+        "source": "model-card.md",
+        "title": "Model Card: claims-fraud-triage version 1",
+        "heading": "Features the model uses",
+        "score": 0.627,
+        "semantic": 0.558,
+        "lexical": 0.711,
+        "snippet": "- What happened: loss type, province, amounts (total, injury reserve, repair), repair-to-value ratio, total loss, hour of loss, occupants and injured, soft-tissue only, police report, witnesses, towing distance, storage days and fees.\n- Who is claiming: policy age at the time of "
+      },
+      {
+        "label": "4",
+        "source": "fair-claims-handling.md",
+        "title": "Fair Claims Handling and Responsible AI",
+        "heading": "Privacy",
+        "score": 0.587,
+        "semantic": 0.524,
+        "lexical": 0.665,
+        "snippet": "Claim files contain personal information and are used only to settle and investigate claims. Notes, statements and documents must not be pasted into public AI services. The copilot runs on a local model on the company's own machines, so claim data does not leave them; this is enf"
+      }
+    ],
+    "model": "qwen2.5-3b-instruct",
+    "local_only": true,
+    "elapsed_ms": 657,
+    "recorded": true
+  }
+]

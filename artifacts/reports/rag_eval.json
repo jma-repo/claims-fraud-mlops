@@ -1,0 +1,415 @@
+{
+  "mode": "generation / hybrid retrieval",
+  "metrics": {
+    "hit_at_1": 0.9167,
+    "hit_at_3": 1.0,
+    "mrr": 0.9583,
+    "out_of_scope_declined": 1.0,
+    "in_scope_wrongly_declined": 0.0,
+    "term_recall": 0.9615,
+    "citation_rate": 0.5,
+    "latency_p50_ms": 999.0,
+    "latency_p95_ms": 1418.0
+  },
+  "rows": [
+    {
+      "id": "staged-red-flags",
+      "question": "What are the red flags of a staged collision?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "red-flag-indicators.md"
+      ],
+      "retrieved": [
+        "red-flag-indicators.md",
+        "red-flag-indicators.md",
+        "investigation-playbook.md",
+        "siu-referral-guidelines.md"
+      ],
+      "top_score": 0.926,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 1146,
+      "answer": "[1] Red-Flag Indicator Guide - Staged collisions\n- The insured says the vehicle ahead stopped suddenly for no reason, often at night.\n- Three or more occupants, all reporting soft-tissue injuries (neck and back pain) with little vehicle damage.\n- The same clinic and the same paralegal or representative appear on claim after claim, often retained within days of the loss.\n- No police attendance and no independent witnesses; the collision is reported at a collision reporting centre.\n- The policy is only weeks or a few months old."
+    },
+    {
+      "id": "referral-contents",
+      "question": "What does an SIU referral have to include?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "siu-referral-guidelines.md"
+      ],
+      "retrieved": [
+        "siu-referral-guidelines.md",
+        "siu-referral-guidelines.md",
+        "siu-referral-guidelines.md",
+        "siu-referral-guidelines.md"
+      ],
+      "top_score": 0.89,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 999,
+      "answer": "An SIU referral must include: the claim number, a summary of the loss, specific indicators observed (quoted from relevant notes or documents), documents already on file such as police reports and photos, and what has been verified. If the referral came from the triage model, attach its reason codes but also list the indicators in your own words."
+    },
+    {
+      "id": "score-as-evidence",
+      "question": "Can we deny a claim because the triage model gave it a high score?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "fair-claims-handling.md"
+      ],
+      "retrieved": [
+        "fair-claims-handling.md",
+        "fair-claims-handling.md",
+        "siu-referral-guidelines.md",
+        "model-card.md"
+      ],
+      "top_score": 0.873,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 812,
+      "answer": "No, we cannot deny a claim because the triage model gave it a high score. A score from the triage model is a triage signal, not evidence; every adverse decision must rest on facts found by a person and written in the file. [1]"
+    },
+    {
+      "id": "release-fee",
+      "question": "A storage yard is holding the vehicle and demanding a release fee. What should the adjuster do?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "investigation-playbook.md"
+      ],
+      "retrieved": [
+        "red-flag-indicators.md",
+        "investigation-playbook.md",
+        "pattern-briefs.md",
+        "investigation-playbook.md"
+      ],
+      "top_score": 0.853,
+      "retrieval": "hybrid",
+      "rank": 2,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 1418,
+      "answer": "The adjuster should move the vehicle to a repair facility of the insured's choice as soon as possible to stop the daily charges (2). They should ask the operator for an itemised invoice, the tow authorisation signed at the scene, and the operator's licence or registration where required by province (3). The adjuster should compare the invoice with provincial towing and storage rules and normal market rates in the area; they should not pay a release fee that has no basis in the invoice (4). If the same operator appears on several claims, the adjuster should refer the pattern to the SIU lead as one group, not claim by claim (5)."
+    },
+    {
+      "id": "fast-track-audit",
+      "question": "Which claims can be fast-tracked and how is the fast-track audited?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "siu-referral-guidelines.md"
+      ],
+      "retrieved": [
+        "siu-referral-guidelines.md",
+        "fair-claims-handling.md",
+        "model-card.md",
+        "fair-claims-handling.md"
+      ],
+      "top_score": 0.905,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 984,
+      "answer": "Claims with a calibrated fraud probability below 0.03 are eligible for fast-tracking. These include glass, parking-lot, and low-value vandalism claims. The SIU audits a random 2% of these fast-tracked claims every month to ensure they do not contain fraudulent cases. If the audit finds patterns indicating higher fraud rates than expected, the threshold or red-flag guide is adjusted accordingly."
+    },
+    {
+      "id": "acknowledge-time",
+      "question": "How quickly must the SIU acknowledge a referral?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "siu-referral-guidelines.md"
+      ],
+      "retrieved": [
+        "siu-referral-guidelines.md",
+        "siu-referral-guidelines.md",
+        "siu-referral-guidelines.md",
+        "siu-referral-guidelines.md"
+      ],
+      "top_score": 0.914,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 632,
+      "answer": "The SIU acknowledges a referral within 2 business days according to the guidelines provided in [1]."
+    },
+    {
+      "id": "model-age",
+      "question": "Does the fraud model use the claimant's age?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "model-card.md",
+        "fair-claims-handling.md"
+      ],
+      "retrieved": [
+        "model-card.md",
+        "fair-claims-handling.md",
+        "model-card.md",
+        "model-card.md"
+      ],
+      "top_score": 0.899,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 803,
+      "answer": "The fraud model does not use the claimant's age as it deliberately excludes this feature in its version 1 Model Card. It also ranks people by age, which is protected under human-rights law and must be avoided in triage. [C]"
+    },
+    {
+      "id": "emerging-pattern",
+      "question": "What is the emerging pattern this month and what should we do about it?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "pattern-briefs.md"
+      ],
+      "retrieved": [
+        "pattern-briefs.md",
+        "pattern-briefs.md",
+        "pattern-briefs.md",
+        "siu-referral-guidelines.md"
+      ],
+      "top_score": 0.807,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 0.5,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 1341,
+      "answer": "The emerging pattern this month is Emerging pattern E1: High tow distances and storage, which involves claims with high towing and storage fees, average 31 days of storage, and an average tow distance of 72 km. The triage model gives these claims an average fraud probability of 4.9%, and one claim has been put in the SIU queue due to its unique characteristics not seen before.\n\nWe should refer this group to the SIU lead as a pattern, label the investigated claims so that the next model version can learn from it, and take recommended action for verification steps."
+    },
+    {
+      "id": "largest-ring",
+      "question": "Which ring has the most claims, and which clinic and representative keep appearing in it?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "pattern-briefs.md"
+      ],
+      "retrieved": [
+        "pattern-briefs.md",
+        "pattern-briefs.md",
+        "pattern-briefs.md",
+        "siu-referral-guidelines.md"
+      ],
+      "top_score": 0.835,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 787,
+      "answer": "Ring R1 in Toronto has the most claims (45) linked through 9 shared phone numbers and addresses. Clinics CLINIC-02 and representatives REP-03 are recurring providers in this ring."
+    },
+    {
+      "id": "public-ai",
+      "question": "Can I paste claim notes into a public AI chatbot to summarise them?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "fair-claims-handling.md"
+      ],
+      "retrieved": [
+        "fair-claims-handling.md",
+        "fair-claims-handling.md",
+        "fair-claims-handling.md",
+        "pattern-briefs.md"
+      ],
+      "top_score": 0.835,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 1005,
+      "answer": "No, you cannot paste claim notes into a public AI chatbot. The material states that notes from claim files must not be pasted into public AI services due to privacy concerns and the need to protect personal information. Instead, the copilot runs on local models within the company's own machines, ensuring that claim data does not leave them."
+    },
+    {
+      "id": "hail",
+      "question": "How do we spot a hail claim where the policy was bought after the storm?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "red-flag-indicators.md"
+      ],
+      "retrieved": [
+        "red-flag-indicators.md",
+        "red-flag-indicators.md",
+        "investigation-playbook.md",
+        "red-flag-indicators.md"
+      ],
+      "top_score": 0.882,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 980,
+      "answer": "[Material]\nRed-Flag Indicator Guide - Post-loss policy inception states that if a policy starts days before the reported loss, there's a long delay between the storm and report, and an appraiser notes weathering inconsistent with a recent storm, then it is a red flag. This indicates that the damage might have been staged to fit within the insurance coverage period."
+    },
+    {
+      "id": "ring-escalation",
+      "question": "Who can share suspected ring information with police or other insurers?",
+      "claim_id": null,
+      "out_of_scope": false,
+      "expected_sources": [
+        "siu-referral-guidelines.md"
+      ],
+      "retrieved": [
+        "siu-referral-guidelines.md",
+        "investigation-playbook.md",
+        "red-flag-indicators.md",
+        "siu-referral-guidelines.md"
+      ],
+      "top_score": 0.861,
+      "retrieval": "hybrid",
+      "rank": 1,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 838,
+      "answer": "The SIU manager may share suspected ring information with law enforcement, industry fraud databases, or other insurers through approved channels. Adjusters are not allowed to contact police or other carriers about suspected fraud on their own."
+    },
+    {
+      "id": "oos-deductible",
+      "question": "What is the deductible on a comprehensive policy in Quebec?",
+      "claim_id": null,
+      "out_of_scope": true,
+      "expected_sources": [],
+      "retrieved": [
+        "siu-referral-guidelines.md",
+        "red-flag-indicators.md",
+        "model-card.md",
+        "fair-claims-handling.md"
+      ],
+      "top_score": 0.784,
+      "retrieval": "hybrid",
+      "rank": null,
+      "declined": true,
+      "term_recall": null,
+      "cited": false,
+      "mode": "generated",
+      "elapsed_ms": 657,
+      "answer": "The material does not cover this."
+    },
+    {
+      "id": "oos-vacation",
+      "question": "How many vacation days do SIU investigators get each year?",
+      "claim_id": null,
+      "out_of_scope": true,
+      "expected_sources": [],
+      "retrieved": [
+        "siu-referral-guidelines.md",
+        "pattern-briefs.md",
+        "investigation-playbook.md",
+        "model-card.md"
+      ],
+      "top_score": 0.803,
+      "retrieval": "hybrid",
+      "rank": null,
+      "declined": true,
+      "term_recall": null,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 689,
+      "answer": "The material does not cover this. [C]"
+    },
+    {
+      "id": "oos-stock",
+      "question": "Should I buy shares of a Canadian insurance company this year?",
+      "claim_id": null,
+      "out_of_scope": true,
+      "expected_sources": [],
+      "retrieved": [
+        "pattern-briefs.md",
+        "pattern-briefs.md",
+        "pattern-briefs.md",
+        "pattern-briefs.md"
+      ],
+      "top_score": 0.801,
+      "retrieval": "hybrid",
+      "rank": null,
+      "declined": true,
+      "term_recall": null,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 785,
+      "answer": "The material does not cover this. [C]"
+    },
+    {
+      "id": "claim-top-queue",
+      "question": "Why is this claim flagged, and what should the investigator check first?",
+      "claim_id": "C-116714",
+      "out_of_scope": false,
+      "expected_sources": [],
+      "retrieved": [
+        "red-flag-indicators.md",
+        "model-card.md",
+        "siu-referral-guidelines.md",
+        "investigation-playbook.md"
+      ],
+      "top_score": 0.93,
+      "retrieval": "hybrid",
+      "rank": null,
+      "declined": false,
+      "term_recall": null,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 1062,
+      "answer": "Why it is in the queue [C]:\n- Adjuster notes read like confirmed fraud files: 'occupants reported', 'pain', 'neck'\n- 5 of 5 occupants claim injury\n- Same representative and clinic paired on 39 prior claims\n- Total claimed $103,579\n- Triage model: fraud probability 93%, expected net saving of investigating $66,520, band Investigate, queue rank 1\n- Links: part of ring R1 (Toronto multi-injury claims around CLINIC-02 and REP-03): 45 claims linked through 9 shared phone numbers and 9 shared addresses\n\nWhat to check first:\n- Check if there are any shared phone numbers or addresses between other recent claims.\n- Review the body shop's average repair-to-value ratio and compare it to industry standards.\n[SIU Referral Guidelines]\n- Refer this claim to the SIU as per the guidelines, given the red-flag indicators present in the adjuster notes.\n- Investigate if the same representative and clinic are involved in other recent claims linked through shared phone numbers or addresses."
+    },
+    {
+      "id": "claim-emerging",
+      "question": "Why is this claim flagged, and what should the investigator check first?",
+      "claim_id": "C-116595",
+      "out_of_scope": false,
+      "expected_sources": [],
+      "retrieved": [
+        "red-flag-indicators.md",
+        "red-flag-indicators.md",
+        "model-card.md",
+        "red-flag-indicators.md"
+      ],
+      "top_score": 0.892,
+      "retrieval": "hybrid",
+      "rank": null,
+      "declined": false,
+      "term_recall": 1.0,
+      "cited": true,
+      "mode": "generated",
+      "elapsed_ms": 1307,
+      "answer": "Why it is in the queue [C]:\n- Adjuster notes read like confirmed fraud files: 'paramedics', 'passenger', 'assessed'\n- 3 of 3 occupants claim injury\n- Total claimed $90,736\n- Vehicle value $73,163\n- Triage model: fraud probability 19%, expected net saving of investigating $11,131, band Standard, queue rank 24\n- Links: member of emerging pattern E1 (High tow distances and storage): 31 similar claims this month, a kind of claim the model has not been trained on\n\nWhat to check first:\n- Check if there are any repeated pairings of the same representative and clinic across unrelated losses. [1]\n- Verify if the tow operator arrived before police or anyone called for a tow, and if the vehicle was towed tens of kilometres past repair shops to a storage yard in another city. [2]\n- Investigate whether additional passengers came forward after the initial report, and if injuries were first reported weeks after the loss. [4]"
+    }
+  ]
+}

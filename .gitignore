@@ -1,0 +1,24 @@
+# Environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+pytest-of-*/
+.pytest-tmp/
+
+# Regenerable working data: `uv run fraudops all` rebuilds all of it in about 90 seconds
+data/
+mlflow.db
+mlartifacts/
+mlruns/
+
+# Local tooling
+.claude/
+*.log
+.DS_Store
+Thumbs.db
+
+# Committed on purpose (the "release snapshot" a fresh clone serves without retraining):
+#   artifacts/  model bundle, serving tables, knowledge index, reports
+#   site/       the dashboard, published to GitHub Pages

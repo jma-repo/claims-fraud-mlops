@@ -1,0 +1,18 @@
+{
+  "E1": {
+    "title": "High tow distances and storage",
+    "source": "llm"
+  },
+  "R1": {
+    "title": "Toronto multi-injury claims around CLINIC-02 and REP-03",
+    "source": "rule"
+  },
+  "R2": {
+    "title": "Calgary multi-injury claims around CLINIC-13 and REP-07",
+    "source": "rule"
+  },
+  "R3": {
+    "title": "Edmonton multi-injury claims around CLINIC-16 and REP-09",
+    "source": "rule"
+  }
+}

@@ -1,0 +1,62 @@
+# Copilot evaluation set. Each in-scope question names the document that should be retrieved and a few
+# words a correct answer must contain; out-of-scope questions must be declined, not answered.
+questions:
+  - id: staged-red-flags
+    question: What are the red flags of a staged collision?
+    expect_sources: [red-flag-indicators.md]
+    expect_terms: [stopped suddenly, soft-tissue, clinic]
+  - id: referral-contents
+    question: What does an SIU referral have to include?
+    expect_sources: [siu-referral-guidelines.md]
+    expect_terms: [indicators, summary]
+  - id: score-as-evidence
+    question: Can we deny a claim because the triage model gave it a high score?
+    expect_sources: [fair-claims-handling.md]
+    expect_terms: [not evidence]
+  - id: release-fee
+    question: A storage yard is holding the vehicle and demanding a release fee. What should the adjuster do?
+    expect_sources: [investigation-playbook.md]
+    expect_terms: [itemised invoice, move the vehicle]
+  - id: fast-track-audit
+    question: Which claims can be fast-tracked and how is the fast-track audited?
+    expect_sources: [siu-referral-guidelines.md]
+    expect_terms: ["0.03", "2%"]
+  - id: acknowledge-time
+    question: How quickly must the SIU acknowledge a referral?
+    expect_sources: [siu-referral-guidelines.md]
+    expect_terms: [2 business days]
+  - id: model-age
+    question: Does the fraud model use the claimant's age?
+    expect_sources: [model-card.md, fair-claims-handling.md]
+    expect_terms: [age]
+  - id: emerging-pattern
+    question: What is the emerging pattern this month and what should we do about it?
+    expect_sources: [pattern-briefs.md]
+    expect_terms: [TOW-25, storage]
+  - id: largest-ring
+    question: Which ring has the most claims, and which clinic and representative keep appearing in it?
+    expect_sources: [pattern-briefs.md]
+    expect_terms: [CLINIC, REP]
+  - id: public-ai
+    question: Can I paste claim notes into a public AI chatbot to summarise them?
+    expect_sources: [fair-claims-handling.md]
+    expect_terms: [public AI]
+  - id: hail
+    question: How do we spot a hail claim where the policy was bought after the storm?
+    expect_sources: [red-flag-indicators.md]
+    expect_terms: [weathering]
+  - id: ring-escalation
+    question: Who can share suspected ring information with police or other insurers?
+    expect_sources: [siu-referral-guidelines.md]
+    expect_terms: [SIU manager]
+  - id: oos-deductible
+    question: What is the deductible on a comprehensive policy in Quebec?
+    out_of_scope: true
+  - id: oos-vacation
+    question: How many vacation days do SIU investigators get each year?
+    out_of_scope: true
+  - id: oos-stock
+    question: Should I buy shares of a Canadian insurance company this year?
+    out_of_scope: true
+
+# Claim-specific questions are added at run time for the top queue claim and one emerging-pattern claim.

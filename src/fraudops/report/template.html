@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claims Fraud Triage</title>
+  <meta name="description" content="End-to-end MLOps and local RAG proof of concept: SIU triage for auto-insurance claims. Synthetic data.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <div class="brand-name">Claims Fraud Triage</div>
+        <div class="brand-sub">SIU queue, patterns and copilot · month <span>{{ month }}</span> · synthetic data</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="mode-chip" id="mode-chip" title="Static snapshot: data embedded in the page. Live: served by the API.">Snapshot</span>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" id="tab-overview" aria-controls="overview" aria-selected="true" data-tab="overview">Overview</button>
+      <button role="tab" id="tab-queue" aria-controls="queue" aria-selected="false" data-tab="queue">SIU queue</button>
+      <button role="tab" id="tab-patterns" aria-controls="patterns" aria-selected="false" data-tab="patterns">Patterns</button>
+      <button role="tab" id="tab-monitoring" aria-controls="monitoring" aria-selected="false" data-tab="monitoring">Monitoring</button>
+      <button role="tab" id="tab-copilot" aria-controls="copilot" aria-selected="false" data-tab="copilot">Copilot</button>
+      <button role="tab" id="tab-stack" aria-controls="stack" aria-selected="false" data-tab="stack">How it works</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Overview ------------------------------------------------------------------------>
+    <section class="panel" id="overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="lede">
+        <p>The Special Investigations Unit can open about <strong data-bind="capacity"></strong> files a month. Today a red-flag
+          scorecard decides which ones. This proof of concept ranks every new claim by <em>expected net saving</em> &mdash;
+          probability of fraud &times; amount &times; recovery rate, minus the cost of investigating &mdash; and backs the queue with
+          pattern detection, monitoring and a local copilot.</p>
+      </div>
+      <div class="hero-row">
+        <div class="hero card">
+          <div class="hero-label">Extra net savings per month vs. today's scorecard</div>
+          <div class="hero-value" id="hero-value"></div>
+          <div class="hero-note" id="hero-note"></div>
+        </div>
+        <div class="kpis" id="kpis"></div>
+      </div>
+      <div class="grid-2-1">
+        <figure class="card chart-card">
+          <figcaption>
+            <h2>Net savings by SIU capacity</h2>
+            <p>Average per month over the three held-out test months, if the SIU opened N files a month.</p>
+          </figcaption>
+          <div class="chart" id="chart-capacity" style="height: 320px"></div>
+          <details class="table-view"><summary>Show as table</summary><div id="table-capacity"></div></details>
+        </figure>
+        <div class="stack">
+          <figure class="card">
+            <figcaption><h2>This month's claims</h2><p id="bands-caption"></p></figcaption>
+            <div id="bands"></div>
+          </figure>
+          <div class="card assumptions">
+            <h2>Assumptions</h2>
+            <p class="muted">Illustrative; edit <code>configs/business.yaml</code> and rerun.</p>
+            <dl id="assumptions"></dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Queue ----------------------------------------------------------------------------->
+    <section class="panel" id="queue" role="tabpanel" aria-labelledby="tab-queue" hidden>
+      <div class="section-head">
+        <div>
+          <h1>SIU queue for <span>{{ month }}</span></h1>
+          <p class="muted">Ranked by expected net saving. The first <span data-bind="capacity"></span> fit this month's capacity; the rest go to adjuster review if their probability is high.</p>
+        </div>
+      </div>
+      <div class="queue-layout">
+        <div class="card table-card">
+          <table class="data-table" id="queue-table">
+            <thead><tr>
+              <th scope="col" class="num">#</th><th scope="col">Claim</th><th scope="col">Loss</th>
+              <th scope="col" class="num">Claimed</th><th scope="col">Fraud probability</th>
+              <th scope="col" class="num">Expected saving</th><th scope="col">Signals</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <aside class="card detail" id="claim-detail" aria-live="polite"></aside>
+      </div>
+      <div class="live-only grid-2" hidden>
+        <div class="card">
+          <h2>Live FNOL feed</h2>
+          <p class="muted">Claims posted to <code>/api/score</code>, newest first. Start one with <code>fraudops replay</code>.</p>
+          <div id="live-feed" class="feed"><p class="muted">Waiting for claims&hellip;</p></div>
+        </div>
+        <div class="card">
+          <h2>Score a claim</h2>
+          <p class="muted">Pick a scenario, adjust it, and send it to the scoring API.</p>
+          <form id="score-form" class="score-form"></form>
+          <div id="score-result" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Patterns -------------------------------------------------------------------------->
+    <section class="panel" id="patterns" role="tabpanel" aria-labelledby="tab-patterns" hidden>
+      <div class="section-head">
+        <div>
+          <h1>Patterns the score alone would miss</h1>
+          <p class="muted">The model only recognises fraud it has been trained on. These unsupervised views look for what is new.</p>
+        </div>
+      </div>
+      <div id="emerging"></div>
+      <div class="grid-2-1">
+        <figure class="card chart-card">
+          <figcaption>
+            <h2>Pattern map</h2>
+            <p>Each dot is a claim, placed so that similar claims sit together (t-SNE). Labels mark where each of the eight claim segments of the last 12 months is centred.</p>
+          </figcaption>
+          <div class="chart" id="chart-map" style="height: 500px"></div>
+        </figure>
+        <figure class="card chart-card">
+          <figcaption>
+            <h2 id="pattern-view-title">The new pattern in real units</h2>
+            <p id="pattern-view-caption">Towed claims only, log scales.</p>
+          </figcaption>
+          <div class="chart" id="chart-pattern-view" style="height: 500px"></div>
+        </figure>
+      </div>
+      <div class="card">
+        <h2>Claim segments</h2>
+        <p class="muted">KMeans on the last 12 months, most fraud-prone first. Confirmed fraud uses past investigation outcomes; "share now" compares this month's mix with last year's.</p>
+        <div id="segments-table"></div>
+      </div>
+      <div class="card">
+        <div class="section-head compact">
+          <div>
+            <h2>Linked claims</h2>
+            <p class="muted">Claims connected through shared phone numbers or addresses. Large groups are where organised rings show up.</p>
+          </div>
+          <div class="segmented" id="ring-picker" role="radiogroup" aria-label="Choose a group"></div>
+        </div>
+        <div class="grid-2-1 inner">
+          <div class="chart" id="chart-ring" style="height: 420px"></div>
+          <div id="ring-facts"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Monitoring ------------------------------------------------------------------------>
+    <section class="panel" id="monitoring" role="tabpanel" aria-labelledby="tab-monitoring" hidden>
+      <div class="section-head">
+        <div>
+          <h1>Model and data health</h1>
+          <p class="muted">Drift, score stability, held-out performance and lineage, as the pipeline recorded them.</p>
+        </div>
+      </div>
+      <div class="kpis kpis-4" id="health-kpis"></div>
+      <div class="grid-2">
+        <figure class="card chart-card">
+          <figcaption>
+            <h2>Extreme values vs. last year</h2>
+            <p>How much more often this month's claims exceed last year's 99th percentile (1&times; = as usual). PSI averages these tails away; this check does not.</p>
+          </figcaption>
+          <div class="chart" id="chart-tail" style="height: 300px"></div>
+        </figure>
+        <figure class="card chart-card">
+          <figcaption>
+            <h2>Score distribution</h2>
+            <p>Share of claims per probability band: the three test months vs. this month.</p>
+          </figcaption>
+          <div class="chart" id="chart-scores" style="height: 300px"></div>
+        </figure>
+      </div>
+      <div class="card">
+        <h2>Feature drift</h2>
+        <p class="muted">Alert when PSI &ge; <span data-bind="psi-alert"></span> with a real mean shift, or when extreme values arrive at &ge; 3&times; the usual rate.</p>
+        <div id="drift-table"></div>
+      </div>
+      <div class="grid-2">
+        <figure class="card chart-card">
+          <figcaption>
+            <h2>Precision vs. recall on the test months</h2>
+            <p>Curves rank claims by probability. The dots are the real queues of 20 files a month; the model's sits below its curve because the queue ranks by dollars, not probability.</p>
+          </figcaption>
+          <div class="chart" id="chart-pr" style="height: 320px"></div>
+        </figure>
+        <figure class="card chart-card">
+          <figcaption>
+            <h2>What drives the score</h2>
+            <p>Mean absolute contribution to the log-odds (SHAP) on the test months.</p>
+          </figcaption>
+          <div class="chart" id="chart-importance" style="height: 320px"></div>
+        </figure>
+      </div>
+      <div class="grid-2">
+        <div class="card"><h2>Candidates</h2><div id="candidates-table"></div></div>
+        <div class="card"><h2>Lineage</h2><dl class="lineage" id="lineage"></dl></div>
+      </div>
+    </section>
+
+    <!-- Copilot ----------------------------------------------------------------------------->
+    <section class="panel" id="copilot" role="tabpanel" aria-labelledby="tab-copilot" hidden>
+      <div class="section-head">
+        <div>
+          <h1>Investigator copilot</h1>
+          <p class="muted">Answers from the SIU policy documents, this run's model card and pattern briefs, and the claim file &mdash;
+            with a local model, so claim data never leaves the machine.</p>
+        </div>
+      </div>
+      <div class="kpis kpis-4" id="rag-kpis"></div>
+      <div class="live-only card" hidden>
+        <form id="ask-form" class="ask-form">
+          <label for="ask-input" class="sr-only">Question</label>
+          <input id="ask-input" name="question" type="text" maxlength="500" placeholder="Ask about a policy, a pattern, or a claim" autocomplete="off" required>
+          <label for="ask-claim" class="sr-only">Claim</label>
+          <select id="ask-claim" name="claim"><option value="">No claim</option></select>
+          <button type="submit" class="primary">Ask</button>
+        </form>
+        <div class="chips" id="ask-examples"></div>
+        <div id="ask-answer" aria-live="polite"></div>
+      </div>
+      <div class="static-only">
+        <p class="muted" id="recorded-note"></p>
+        <div id="recorded"></div>
+      </div>
+    </section>
+
+    <!-- How it works ------------------------------------------------------------------------>
+    <section class="panel" id="stack" role="tabpanel" aria-labelledby="tab-stack" hidden>
+      <div class="section-head">
+        <div>
+          <h1>How it works</h1>
+          <p class="muted">The MLOps stack, cut down to what a proof of concept needs, all open source and free to run on a laptop.</p>
+        </div>
+      </div>
+      <div class="card"><div class="flow" id="flow"></div></div>
+      <div class="card">
+        <h2>Stack choices</h2>
+        <div id="stack-table"></div>
+      </div>
+      <div class="card honesty">
+        <h2>What is real and what is simulated</h2>
+        <ul>
+          <li><strong>Real:</strong> the pipeline, the models, MLflow tracking and registry, the online/batch feature parity, the API, the drift checks, the local LLM and its evaluation. Every number on this page was computed by the run that produced it.</li>
+          <li><strong>Simulated:</strong> the claims. They are synthetic, generated with seven documented fraud mechanisms and plenty of legitimate claims that share their red flags. Providers and people are coded IDs.</li>
+          <li><strong>Assumed:</strong> the business inputs (capacity, cost per file, recovery rate). They sit in one config file and are printed next to every dollar figure.</li>
+          <li><strong>Hindsight:</strong> &ldquo;hidden truth&rdquo; checks on the newest month use labels a real carrier would not have yet; they exist to show whether an alert was right.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Generated <time>{{ generated_at }}</time> by <code>fraudops report</code>.</span>
+    <span>All claims are synthetic. Not affiliated with any insurer.</span>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="status" hidden></div>
+  <script id="dashboard-data" type="application/json">{{ data_json | safe }}</script>
+  <script src="assets/plotly.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

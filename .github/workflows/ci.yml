@@ -1,0 +1,70 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Weekly: re-run the whole pipeline from scratch, the PoC's stand-in for an orchestrator.
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Lint, tests, pipeline smoke run
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.6"
+          enable-cache: true
+      - name: Install
+        run: uv sync --frozen
+      - name: Lint
+        run: uv run ruff check src tests scripts
+      - name: Tests (feature parity, leakage, business rules, RAG guardrails, API)
+        run: uv run pytest
+      - name: Pipeline smoke run on a small dataset, no LLM
+        env:
+          FRAUDOPS_HOME: ${{ runner.temp }}/smoke
+        run: uv run fraudops all --small --no-llm
+      - name: Keep the smoke run's reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-reports
+          path: ${{ runner.temp }}/smoke/artifacts/reports
+          retention-days: 14
+
+  image:
+    name: Build and boot the hardened image
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker build -t claims-fraud-mlops:ci .
+      - name: Boot read-only, non-root, no capabilities, and score a claim
+        run: |
+          docker run -d --name api --read-only --tmpfs /tmp --cap-drop ALL \
+            --security-opt no-new-privileges:true -p 8000:8000 claims-fraud-mlops:ci
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8000/api/health && break
+            sleep 2
+          done
+          curl -fsS -X POST http://127.0.0.1:8000/api/score \
+            -H 'content-type: application/json' -d @tests/fixtures/claim.json | tee score.json
+          grep -q '"band"' score.json
+          test "$(docker inspect --format '{{.Config.User}}' api)" = "app"
+      - name: Container logs on failure
+        if: failure()
+        run: docker logs api

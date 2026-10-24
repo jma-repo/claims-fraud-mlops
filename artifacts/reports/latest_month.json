@@ -1,0 +1,97 @@
+{
+  "month": "2026-09",
+  "claims": 643,
+  "queue": 20,
+  "bands": {
+    "Fast-track": 497,
+    "Standard": 109,
+    "Investigate": 20,
+    "Review": 17
+  },
+  "queue_value": 666668.3,
+  "model_version": "1",
+  "hidden_truth": {
+    "model_queue": {
+      "investigated": 20,
+      "frauds_caught": 17,
+      "frauds_total": 79,
+      "hit_rate": 0.85,
+      "fraud_dollars_caught": 948440.27,
+      "fraud_dollars_total": 1324796.53,
+      "dollar_recall": 0.7159139147201722,
+      "prevented": 663908.189,
+      "cost": 24000.0,
+      "net_savings": 639908.189,
+      "honest_investigated": 3
+    },
+    "rules_queue": {
+      "investigated": 20,
+      "frauds_caught": 11,
+      "frauds_total": 79,
+      "hit_rate": 0.55,
+      "fraud_dollars_caught": 586816.6,
+      "fraud_dollars_total": 1324796.53,
+      "dollar_recall": 0.4429484730006048,
+      "prevented": 410771.61999999994,
+      "cost": 24000.0,
+      "net_savings": 386771.61999999994,
+      "honest_investigated": 9
+    },
+    "by_scheme": [
+      {
+        "scheme": "injury_buildup",
+        "claims": 4,
+        "in_queue": 2,
+        "mean_probability": 0.669,
+        "fraud_dollars": 63598.82
+      },
+      {
+        "scheme": "owner_giveup",
+        "claims": 5,
+        "in_queue": 3,
+        "mean_probability": 0.533,
+        "fraud_dollars": 275575.22
+      },
+      {
+        "scheme": "post_loss_inception",
+        "claims": 1,
+        "in_queue": 0,
+        "mean_probability": 0.202,
+        "fraud_dollars": 5073.73
+      },
+      {
+        "scheme": "repair_buildup",
+        "claims": 11,
+        "in_queue": 0,
+        "mean_probability": 0.353,
+        "fraud_dollars": 53508.32
+      },
+      {
+        "scheme": "soft_padding",
+        "claims": 15,
+        "in_queue": 0,
+        "mean_probability": 0.058,
+        "fraud_dollars": 29462.04
+      },
+      {
+        "scheme": "staged_ring",
+        "claims": 11,
+        "in_queue": 11,
+        "mean_probability": 0.912,
+        "fraud_dollars": 736989.11
+      },
+      {
+        "scheme": "towing_storage",
+        "claims": 32,
+        "in_queue": 1,
+        "mean_probability": 0.049,
+        "fraud_dollars": 160589.29
+      }
+    ],
+    "fast_track": {
+      "share_of_claims": 0.7729,
+      "fraud_dollars_missed": 137261.88,
+      "fraud_claims_missed": 34
+    }
+  }
+}

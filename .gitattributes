@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.parquet binary
+*.joblib binary
+*.png binary
+site/assets/plotly.min.js -diff linguist-vendored
+site/** linguist-generated

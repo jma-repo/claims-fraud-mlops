@@ -1,0 +1,16 @@
+# Illustrative business assumptions. Replace them with the carrier's own numbers before quoting results;
+# the dashboard prints them next to every dollar figure for exactly that reason.
+currency: CAD
+
+siu:
+  capacity_per_month: 20       # files the Special Investigations Unit can open per month (~3% of claims)
+  investigation_cost: 1200     # internal hours + external costs (statements, inspections) per file
+  recovery_rate: 0.70          # share of the fraudulent amount prevented once an investigated file is confirmed
+
+triage:
+  fast_track_below: 0.03       # calibrated fraud probability under which a claim can skip manual review
+  review_above: 0.25           # flagged for an adjuster red-flag checklist when not in the SIU queue
+
+copilot:
+  minutes_saved_per_case: 25   # file review + policy lookup time saved per investigation (to be measured in a pilot)
+  investigator_hourly_cost: 65
