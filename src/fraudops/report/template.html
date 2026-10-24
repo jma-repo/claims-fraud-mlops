@@ -6,7 +6,7 @@
   <title>Claims Fraud Triage</title>
   <meta name="description" content="End-to-end MLOps and local RAG proof of concept: SIU triage for auto-insurance claims. Synthetic data.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/styles.css?v={{ v['styles.css'] }}">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -266,7 +266,7 @@
 
   <div class="tooltip" id="tooltip" role="status" hidden></div>
   <script id="dashboard-data" type="application/json">{{ data_json | safe }}</script>
-  <script src="assets/plotly.min.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="assets/plotly.min.js?v={{ v['plotly.min.js'] }}"></script>
+  <script src="assets/app.js?v={{ v['app.js'] }}"></script>
 </body>
 </html>

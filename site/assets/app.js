@@ -216,7 +216,9 @@
       history.replaceState(null, '', `#${name}`);
       window.scrollTo(0, 0);
     }
-    requestAnimationFrame(rerenderVisible);
+    // Animation frames pause in a background tab; the timeout still draws the charts there.
+    if (document.hidden) setTimeout(rerenderVisible, 50);
+    else requestAnimationFrame(rerenderVisible);
   }
   TABS.forEach((tab, index) => {
     tab.addEventListener('click', () => showTab(tab.dataset.tab));

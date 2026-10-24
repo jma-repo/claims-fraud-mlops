@@ -7,6 +7,7 @@ the FNOL feed).
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import shutil
@@ -122,6 +123,9 @@ def run(settings: Settings) -> Path:
         data_json=json.dumps(data, separators=(",", ":"), default=str).replace("</", "<\\/"),
         month=data["month"],
         generated_at=data["generated_at"],
+        # Content hashes in asset URLs: a redeploy reaches visitors at once instead of after the CDN cache expires.
+        v={name: hashlib.sha256((assets / name).read_bytes()).hexdigest()[:10]
+           for name in ("app.js", "styles.css", "plotly.min.js")},
     )
     (site / "index.html").write_text(page, encoding="utf-8", newline="\n")
     (site / ".nojekyll").write_text("", encoding="utf-8")  # GitHub Pages: serve assets as-is
