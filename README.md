@@ -91,6 +91,8 @@ flowchart LR
   D --> GP["GitHub Pages"]
 ```
 
+**[Open the interactive diagram](https://jma-repo.github.io/claims-fraud-mlops/diagram.html)**: walk through one run step by step, click any box for what it does and where the code lives.
+
 ## The MLOps stack, cut down to a PoC
 
 | Stage | Reference stack | This PoC | Why | Production path (Azure) |
